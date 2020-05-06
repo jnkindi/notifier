@@ -31,6 +31,7 @@ class UserController extends Controller
         $user->name = $request->input('name');
         // By default a new user has default rate limit
         $user->rate_limit = 0;
+        $user->month_quota = $request->input('month_quota') ? $request->input('month_quota') : 0;
         $user->save();
         return new UserResource($user);
     }
@@ -61,7 +62,12 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user = User::find($id);
-        $user->rate_limit = $request->input('rate_limit');
+        if($request->input('rate_limit')) {
+            $user->rate_limit = $request->input('rate_limit');
+        }
+        if($request->input('month_quota')) {
+            $user->month_quota = $request->input('month_quota');
+        }
         $user->save();
         return new UserResource($user);
     }
