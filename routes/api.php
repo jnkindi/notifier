@@ -14,6 +14,17 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+// List all users
+Route::get('users', 'UserController@index');
+
+// Get single user Info
+Route::get('user/{id}', 'UserController@show');
+
+// Add new user
+Route::post('user', 'UserController@store');
+
+// Update user
+Route::put('user/{id}/upgrade', 'UserController@update');
+
+// Delete user
+Route::delete('user/{id}', 'UserController@destroy');
