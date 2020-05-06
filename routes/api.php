@@ -28,3 +28,7 @@ Route::put('user/{id}/upgrade', 'UserController@update');
 
 // Delete user
 Route::delete('user/{id}', 'UserController@destroy');
+
+
+// Notification Route
+Route::get('notifications', 'NotificationController@index');
