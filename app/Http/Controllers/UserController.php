@@ -63,7 +63,8 @@ class UserController extends Controller
     {
         $user = User::find($id);
         if($request->input('rate_limit')) {
-            $user->rate_limit = $request->input('rate_limit');
+            // Rate limit, user enters requests/second and we convert them in total requests in a minute
+            $user->rate_limit = $request->input('rate_limit')*60;
         }
         if($request->input('month_quota')) {
             $user->month_quota = $request->input('month_quota');
