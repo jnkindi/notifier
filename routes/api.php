@@ -17,18 +17,25 @@ use Illuminate\Support\Facades\Route;
 // List all users
 Route::get('users', 'UserController@index');
 
-// Get single user Info
-Route::get('user/{id}', 'UserController@show');
-
 // Add new user
 Route::post('user', 'UserController@store');
 
-// Update user
-Route::put('user/{id}/upgrade', 'UserController@update');
+Route::group(['prefix'=>'user/{id}'],function(){
+    // Get single user Info
+    Route::get('', 'UserController@show');
+    
+    // Delete user
+    Route::delete('', 'UserController@destroy');
+    
+    // Update user
+    Route::put('/upgrade', 'UserController@update');
 
-// Delete user
-Route::delete('user/{id}', 'UserController@destroy');
+    // Notifications
+    Route::middleware('usermonthlyremainder')->get('/notifications', 'NotificationController@index');
+});
+
 
 
 // Notification Route
-Route::get('notifications', 'NotificationController@index');
+// Route::middleware('throttle: 10|rate_limit,1')->get('notifications/{id}', function($id) {
+

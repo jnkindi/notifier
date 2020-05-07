@@ -13,9 +13,9 @@ class NotificationController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $emp = Notification::all();
-        return NotificationResource::collection($emp);
+        $notifications = Notification::all();
+        return NotificationResource::collection($notifications);
     }
 }
