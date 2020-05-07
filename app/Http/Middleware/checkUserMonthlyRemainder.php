@@ -4,6 +4,8 @@ namespace App\Http\Middleware;
 
 use Closure;
 use Symfony\Component\HttpKernel\Exception\HttpException;
+use GrahamCampbell\Throttle\Facades\Throttle;
+
 
 class checkUserMonthlyRemainder
 {

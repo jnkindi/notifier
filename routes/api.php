@@ -31,7 +31,9 @@ Route::group(['prefix'=>'user/{id}'],function(){
     Route::put('/upgrade', 'UserController@update');
 
     // Notifications
-    Route::middleware('usermonthlyremainder')->get('/notifications', 'NotificationController@index');
+    // Set the global limit rate from 
+    $user_default_limit = env('DEFAULT_USER_RATE_LIMIT', 60);
+    Route::middleware(["throttle:".$user_default_limit.", 1",'usermonthlyremainder'])->get('/notifications', 'NotificationController@index');
 });
 
 
